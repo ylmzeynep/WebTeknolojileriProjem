@@ -1,0 +1,92 @@
+<!-- API veri sayfası -->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>İlgi Alanlarım</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/" href="images/favicon.ico">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar (index.html ile aynı) -->
+  <nav class="navbar navbar-expand-lg navbar-dark ">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Zeynep'in Sitesi 🌸</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Hakkımda</a></li>
+          <li class="nav-item"><a class="nav-link" href="cv.html">CV</a></li>
+          <li class="nav-item"><a class="nav-link" href="sehir.html">Şehrim</a></li>
+          <li class="nav-item"><a class="nav-link" href="miras.html">Mirasımız</a></li>
+          <li class="nav-item"><a class="nav-link active" href="ilgi-alanlarim.html">İlgi Alanlarım</a></li>
+          <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.html">Giriş Yap</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- İlgi Alanları İçeriği -->
+  <main class="container my-5">
+    <header class="text-center mb-5">
+      <h1>İlgi Alanlarım</h1>
+      <p class="lead">API kullanarak popüler şarkıları gösteriyorum</p>
+    </header>
+  
+    <h2 class="mb-4">Popüler Şarkılar</h2>
+    <div class="row" id="music-cards">
+      <!-- Kartlar buraya eklenecek -->
+    </div>
+  </main>
+    
+
+  <script>
+    const apiKey = '49045ac520e259664252038ee2f5774b';
+    const apiUrl = `https://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=${apiKey}&format=json`;
+  
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const musicCards = document.getElementById('music-cards');
+  
+        data.tracks.track.forEach(track => {
+          const artist = track.artist.name;
+          const title = track.name;
+  
+          const card = document.createElement('div');
+          card.className = 'col-md-4 mb-4';
+  
+          card.innerHTML = `
+            <div class="card shadow-sm border-primary">
+              <div class="card-body">
+                <h5 class="card-title">${title}</h5>
+                <p class="card-text">Sanatçı: ${artist}</p>
+              </div>
+            </div>
+          `;
+  
+          musicCards.appendChild(card);
+        });
+      })
+      .catch(error => console.error('Hata:', error));
+  </script>
+  
+  
+  
+  <!-- Footer (index.html ile aynı) -->
+  <footer class=" text-white text-center py-3">
+    <p>© 2025 Zeynep Yılmaz - Tüm hakları saklıdır.</p>
+    <p><a href="login.html" class="text-white">Giriş Yap</a></p>
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>  
+  
