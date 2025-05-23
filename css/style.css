@@ -39,3 +39,7 @@ header {
     padding: 10px;
   }
   
+.nav-link.active {
+  color: #eb8bdf !important;
+  font-weight: 600;
+}
