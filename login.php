@@ -1,27 +1,22 @@
 <?php
-// Beklenen kullanıcı bilgileri
+
 $expected_username = "g231210014@ogr.sakarya.edu.tr";
 $expected_password = "g231210014";
 
-// Formdan gelen veriler
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 
-// Boş alan kontrolü
 if (empty($username) || empty($password)) {
     header("Location: login.html?error=empty");
     exit();
 }
 
-// E-posta format kontrolü
 if (!filter_var($username, FILTER_VALIDATE_EMAIL)) {
     header("Location: login.html?error=email");
     exit();
 }
 
-// Doğrulama: kullanıcı adı ve şifre eşleşmeli
 if ($username === $expected_username && $password === $expected_password) {
-    // Kullanıcı adı '@' öncesi kısmı
     $user_id = strstr($username, '@', true);
     echo "<!DOCTYPE html>
     <html lang='tr'>
@@ -54,17 +49,14 @@ if ($username === $expected_username && $password === $expected_password) {
         </div>
       </nav>
 
-      <!-- Giriş Sonucu -->
       <main class='container my-5 text-center'>
         <h2 class='text-success'>Hoşgeldiniz <strong>$user_id</strong></h2>
         <p class='lead'>Başarıyla giriş yaptınız.</p>
         <a href='index.html' class='btn btn-success mt-3'>Ana Sayfaya Dön</a>
       </main>
 
-      <!-- Footer -->
       <footer class='text-white text-center py-3 mt-auto'>
         <p>© 2025 Zeynep Yılmaz - Tüm hakları saklıdır.</p>
-        <p><a href='login.html' class='text-white'>Giriş Yap</a></p>
       </footer>
 
       <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js'></script>

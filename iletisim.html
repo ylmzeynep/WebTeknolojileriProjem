@@ -10,7 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <!-- Navbar -->
+ 
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
       <a class="navbar-brand" href="index.html">Zeynep'in Sitesi 🌸</a>
@@ -31,7 +31,6 @@
     </div>
   </nav>
 
-  <!-- Form Alanı -->
   <div id="app" class="container mt-5">
     <h2 class="mb-4">İletişim Formu</h2>
 
@@ -87,13 +86,10 @@
     </form>
   </div>
 
-  <!-- Footer (index.html ile aynı) -->
-  <footer class=" text-white text-center py-3">
+  <footer class="text-white text-center py-3">
     <p>© 2025 Zeynep Yılmaz - Tüm hakları saklıdır.</p>
-    <p><a href="login.html" class="text-white">Giriş Yap</a></p>
   </footer>
 
-  <!-- Vue.js -->
   <script>
     new Vue({
       el: '#app',
@@ -135,45 +131,29 @@
           return true;
         },
 
-        validateClear() {
-          this.errorMessage = '';
-          this.successMessage = '';
-
-          const isEmpty = Object.values(this.form).every(val => val === '');
-          if (isEmpty) {
-            this.errorMessage = 'Form zaten boş.';
-            return false;
-          }
-          return true;
-        },
-
         validateForm() {
           if (this.validateSend()) {
             localStorage.setItem('iletisimFormu', JSON.stringify(this.form));
             this.successMessage = 'Form başarıyla gönderildi. Yönlendiriliyorsunuz...';
 
             setTimeout(() => {
-              this.clearForm();  // Formu temizle
+              this.clearForm();
               window.location.href = 'form-sonuc.html';
             }, 1500);
           }
         },
 
         clearForm() {
-          if (this.validateClear()) {
-            if (confirm('Form temizlensin mi?')) {
-              this.form = {
-                name: '',
-                email: '',
-                phone: '',
-                gender: '',
-                subject: '',
-                message: ''
-              };
-              this.errorMessage = '';
-              this.successMessage = '';
-            }
-          }
+          this.form = {
+            name: '',
+            email: '',
+            phone: '',
+            gender: '',
+            subject: '',
+            message: ''
+          };
+          this.errorMessage = '';
+          this.successMessage = '';
         },
 
         onlyDigits(event) {
